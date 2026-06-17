@@ -1,0 +1,215 @@
+---
+interface Props {
+  lang?: 'es' | 'en';
+  isHomePage?: boolean;
+}
+
+const { lang = 'es', isHomePage = false } = Astro.props;
+const homeUrl = lang === 'es' ? '/' : '/en/';
+const articlesUrl = lang === 'es' ? '/articles/' : '/en/articles/';
+const prefix = isHomePage ? '' : (lang === 'es' ? '/' : '/en/');
+---
+<nav class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href={homeUrl} class="font-display font-extrabold text-lg tracking-tight text-text">
+      Jorge<span class="text-blue">.</span>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a href={`${prefix}#about`}
+         class="text-muted hover:text-blue transition-colors"
+         data-nav-link>
+        <span data-lang="es">Sobre mí</span>
+        <span data-lang="en">About</span>
+      </a>
+      <a href={`${prefix}#skills`}
+         class="text-muted hover:text-blue transition-colors"
+         data-nav-link>
+        <span data-lang="es">Habilidades</span>
+        <span data-lang="en">Skills</span>
+      </a>
+      <a href={`${prefix}#projects`}
+         class="text-muted hover:text-blue transition-colors"
+         data-nav-link>
+        <span data-lang="es">Proyectos</span>
+        <span data-lang="en">Projects</span>
+      </a>
+      <a href={`${prefix}#experience`}
+         class="text-muted hover:text-blue transition-colors"
+         data-nav-link>
+        <span data-lang="es">Experiencia</span>
+        <span data-lang="en">Experience</span>
+      </a>
+      <a href={articlesUrl}
+         class="text-muted hover:text-blue transition-colors"
+         data-nav-link="articles">
+        <span data-lang="es">Artículos</span>
+        <span data-lang="en">Articles</span>
+      </a>
+      <a href={`${prefix}#contact`}
+         class="text-muted hover:text-blue transition-colors"
+         data-nav-link>
+        <span data-lang="es">Contacto</span>
+        <span data-lang="en">Contact</span>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <!-- Language Toggle Pill -->
+      <div class="flex bg-surface-alt rounded-full p-0.5 text-xs font-semibold">
+        <button
+          class="px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer lang-btn"
+          data-lang-btn="es"
+          aria-label="Español">
+          ES
+        </button>
+        <button
+          class="px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer lang-btn"
+          data-lang-btn="en"
+          aria-label="English">
+          EN
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="md:hidden p-2 text-muted hover:text-text transition-colors"
+        id="mobile-menu-btn"
+        aria-label="Toggle menu"
+        aria-expanded="false">
+        <svg class="w-5 h-5" id="menu-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg class="w-5 h-5 hidden" id="menu-icon-close" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="hidden md:hidden border-t border-border bg-surface" id="mobile-menu">
+    <div class="px-4 py-4 flex flex-col gap-3 text-sm font-medium">
+      <a href={`${prefix}#about`} class="text-muted hover:text-blue transition-colors py-1 mobile-nav-link">
+        <span data-lang="es">Sobre mí</span>
+        <span data-lang="en">About</span>
+      </a>
+      <a href={`${prefix}#skills`} class="text-muted hover:text-blue transition-colors py-1 mobile-nav-link">
+        <span data-lang="es">Habilidades</span>
+        <span data-lang="en">Skills</span>
+      </a>
+      <a href={`${prefix}#projects`} class="text-muted hover:text-blue transition-colors py-1 mobile-nav-link">
+        <span data-lang="es">Proyectos</span>
+        <span data-lang="en">Projects</span>
+      </a>
+      <a href={`${prefix}#experience`} class="text-muted hover:text-blue transition-colors py-1 mobile-nav-link">
+        <span data-lang="es">Experiencia</span>
+        <span data-lang="en">Experience</span>
+      </a>
+      <a href={articlesUrl} class="text-muted hover:text-blue transition-colors py-1 mobile-nav-link" data-nav-link="articles">
+        <span data-lang="es">Artículos</span>
+        <span data-lang="en">Articles</span>
+      </a>
+      <a href={`${prefix}#contact`} class="text-muted hover:text-blue transition-colors py-1 mobile-nav-link">
+        <span data-lang="es">Contacto</span>
+        <span data-lang="en">Contact</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // On load, sync the Articles link to the active language. The display
+  // language can come from localStorage (preferred-lang) and differ from the
+  // page's server-rendered language, so the href must follow data-active-lang.
+  function syncArticlesLinks() {
+    const lang = document.documentElement.getAttribute('data-active-lang') || 'es';
+    document.querySelectorAll('[data-nav-link="articles"]').forEach((link) => {
+      (link as HTMLAnchorElement).href = lang === 'es' ? '/articles/' : '/en/articles/';
+    });
+  }
+  syncArticlesLinks();
+
+  // Language toggle logic
+  document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const newLang = btn.getAttribute('data-lang-btn') as string;
+      const currentLang = document.documentElement.getAttribute('data-active-lang');
+      if (newLang === currentLang) return;
+
+      // Check if we're on a home page or need to navigate
+      const path = window.location.pathname;
+      const isHome = path === '/' || path === '/en/' || path === '/en';
+
+      if (isHome) {
+        // Swap language in-place
+        document.documentElement.setAttribute('lang', newLang);
+        document.documentElement.setAttribute('data-active-lang', newLang);
+        localStorage.setItem('preferred-lang', newLang);
+
+        // Toggle data-lang elements
+        document.querySelectorAll('[data-lang]').forEach((el) => {
+          if (el.getAttribute('data-lang') === newLang) {
+            el.classList.add('active');
+          } else {
+            el.classList.remove('active');
+          }
+        });
+
+        // Update toggle button styles
+        document.querySelectorAll('[data-lang-btn]').forEach((b) => {
+          if (b.getAttribute('data-lang-btn') === newLang) {
+            b.classList.add('bg-blue', 'text-white');
+            b.classList.remove('text-muted');
+          } else {
+            b.classList.remove('bg-blue', 'text-white');
+            b.classList.add('text-muted');
+          }
+        });
+
+        // Update nav links for articles
+        document.querySelectorAll('[data-nav-link="articles"]').forEach((link) => {
+          (link as HTMLAnchorElement).href = newLang === 'es' ? '/articles/' : '/en/articles/';
+        });
+      } else {
+        // Navigate to the other language version
+        localStorage.setItem('preferred-lang', newLang);
+        if (newLang === 'en') {
+          if (!path.startsWith('/en/')) {
+            window.location.href = '/en' + path;
+          }
+        } else {
+          if (path.startsWith('/en/')) {
+            window.location.href = path.replace(/^\/en/, '');
+          }
+        }
+      }
+    });
+  });
+
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    const isOpen = !mobileMenu?.classList.contains('hidden');
+    mobileMenu?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('hidden');
+    iconClose?.classList.toggle('hidden');
+    mobileMenuBtn.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

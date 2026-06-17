@@ -1,0 +1,71 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  tags: string[];
+  lang: 'es' | 'en';
+  slug: string;
+}
+
+const { title, description, date, tags, lang, slug } = Astro.props;
+const alternateUrl = lang === 'es'
+  ? `/en/articles/${slug}/`
+  : `/articles/${slug}/`;
+const formattedDate = date.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-AU', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const articlesUrl = lang === 'es' ? '/articles/' : '/en/articles/';
+---
+<BaseLayout
+  title={`${title} — Jorge Iriarte`}
+  description={description}
+  lang={lang}
+  alternateUrl={alternateUrl}
+>
+  <article class="pt-28 pb-16 px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto">
+      <!-- Back link -->
+      <a href={articlesUrl}
+         class="inline-flex items-center gap-1 text-sm text-muted hover:text-blue transition-colors mb-8">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        </svg>
+        {lang === 'es' ? 'Volver a artículos' : 'Back to articles'}
+      </a>
+
+      <!-- Article header -->
+      <header class="mb-10">
+        <time class="text-sm text-muted font-medium" datetime={date.toISOString()}>
+          {formattedDate}
+        </time>
+        <h1 class="font-display font-extrabold text-3xl mt-3 mb-4
+                    sm:text-4xl">
+          {title}
+        </h1>
+        <p class="text-muted text-lg leading-relaxed mb-5">
+          {description}
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span class="text-xs bg-blue-soft text-blue font-medium px-3 py-1 rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </header>
+
+      <!-- Divider -->
+      <hr class="border-border mb-10" />
+
+      <!-- Article content -->
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

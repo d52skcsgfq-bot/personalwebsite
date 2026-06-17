@@ -1,0 +1,107 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { theme as defaultTheme } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: 'es' | 'en';
+  alternateUrl?: string;
+  isHomePage?: boolean;
+}
+
+const {
+  title,
+  description,
+  lang = 'es',
+  alternateUrl,
+  isHomePage = false,
+} = Astro.props;
+
+const alternateLang = lang === 'es' ? 'en' : 'es';
+const canonicalUrl = Astro.url.pathname;
+---
+<!DOCTYPE html>
+<html lang={lang} data-default-lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Blocking script: set active design theme before first paint (no flash).
+       The theme is controlled entirely by src/config/site.ts. -->
+  <script is:inline define:vars={{ defaultTheme }}>
+    document.documentElement.setAttribute('data-theme', defaultTheme);
+  </script>
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- hreflang -->
+  <link rel="canonical" href={canonicalUrl} />
+  {alternateUrl && (
+    <link rel="alternate" hreflang={alternateLang} href={alternateUrl} />
+  )}
+  {alternateUrl && (
+    <link rel="alternate" hreflang={lang} href={canonicalUrl} />
+  )}
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_AU'} />
+
+  <!-- Blocking script: set active language before first paint -->
+  <script is:inline define:vars={{ defaultLang: lang }}>
+    (function() {
+      var isHome = document.documentElement.hasAttribute('data-default-lang');
+      var stored = localStorage.getItem('preferred-lang');
+      var lang = stored || defaultLang;
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('data-active-lang', lang);
+
+      // Activate correct data-lang elements
+      document.addEventListener('DOMContentLoaded', function() {
+        var all = document.querySelectorAll('[data-lang]');
+        all.forEach(function(el) {
+          if (el.getAttribute('data-lang') === lang) {
+            el.classList.add('active');
+          } else {
+            el.classList.remove('active');
+          }
+        });
+
+        // Set toggle button state
+        var btns = document.querySelectorAll('[data-lang-btn]');
+        btns.forEach(function(btn) {
+          if (btn.getAttribute('data-lang-btn') === lang) {
+            btn.classList.add('bg-blue', 'text-white');
+            btn.classList.remove('text-muted');
+          } else {
+            btn.classList.remove('bg-blue', 'text-white');
+            btn.classList.add('text-muted');
+          }
+        });
+      });
+    })();
+  </script>
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+  <Nav lang={lang} isHomePage={isHomePage} />
+  <main>
+    <slot />
+  </main>
+  <Footer lang={lang} />
+</body>
+</html>

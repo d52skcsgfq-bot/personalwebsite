@@ -1,0 +1,186 @@
+@import 'tailwindcss';
+
+/*
+ * Design themes are driven entirely by the tokens below. Components reference
+ * them via utilities (bg-bg, text-text, bg-blue, font-display, …) and never
+ * hardcode colors, so switching the whole look = swapping these values.
+ *
+ * @theme declares the token NAMES (so Tailwind generates the utilities) and
+ * sets the default "portfolio" values. The [data-theme] blocks underneath
+ * override those same variables at runtime; a button on <html> flips them.
+ *
+ * NOTE: the accent token is still named --color-blue for historical reasons.
+ * In the fusion5 theme it holds coral, not blue. Renaming it to --color-accent
+ * (and bg-accent / text-accent across components) is a worthwhile later cleanup.
+ */
+@theme {
+  --color-bg: #0b0f1a;
+  --color-surface: #121a2b;
+  --color-surface-alt: #1b2436;
+  --color-text: #e8edf5;
+  --color-muted: #93a1b5;
+  --color-blue: #10b981;
+  --color-blue-soft: rgba(16, 185, 129, 0.12);
+  --color-blue-mid: #34d399;
+  --color-on-accent: #04130d;
+  --color-slate: #0a0e17;
+  --color-border: rgba(148, 163, 184, 0.16);
+
+  --font-display: 'Epilogue', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --radius-card: 10px;
+}
+
+/* Portfolio theme (dark navy, emerald accent — modern web-developer-portfolio look) */
+:root[data-theme='portfolio'] {
+  --color-bg: #0b0f1a;
+  --color-surface: #121a2b;
+  --color-surface-alt: #1b2436;
+  --color-text: #e8edf5;
+  --color-muted: #93a1b5;
+  --color-blue: #10b981;       /* emerald — primary accent */
+  --color-blue-soft: rgba(16, 185, 129, 0.12);
+  --color-blue-mid: #34d399;   /* bright emerald — borders / hovers */
+  --color-on-accent: #04130d;  /* near-black text sitting on the accent */
+  --color-slate: #0a0e17;
+  --color-border: rgba(148, 163, 184, 0.16);
+
+  --font-display: 'Epilogue', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --radius-card: 10px;
+}
+
+/* Fusion5 theme (coral accent on dark violet — corporate brand palette) */
+:root[data-theme='fusion5'] {
+  --color-bg: #1c1226;
+  --color-surface: #281834;
+  --color-surface-alt: #34203f;
+  --color-text: #ffffff;
+  --color-muted: #b9a8c7;
+  --color-blue: #ff5c39;       /* coral — primary accent */
+  --color-blue-soft: rgba(255, 92, 57, 0.14);
+  --color-blue-mid: #f47e5d;   /* aprica */
+  --color-on-accent: #ffffff;
+  --color-slate: #3b1d4e;      /* violet */
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius-card: 4px;
+}
+
+/* Hero ambience — soft accent glow + faint starfield, portfolio (dark) theme only */
+:root[data-theme='portfolio'] .hero {
+  background-image:
+    radial-gradient(60% 55% at 50% -5%, rgba(16, 185, 129, 0.12), transparent 70%),
+    radial-gradient(45% 40% at 82% 8%, rgba(139, 92, 246, 0.10), transparent 70%),
+    radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1.5px);
+  background-size: auto, auto, 34px 34px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* Bilingual content: hide all data-lang by default, JS activates the correct one */
+[data-lang] {
+  display: none !important;
+}
+
+[data-lang].active {
+  display: revert !important;
+}
+
+/* Prose styles for article content */
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+}
+
+.prose p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+}
+
+.prose code {
+  background-color: var(--color-surface-alt);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.prose pre {
+  background-color: var(--color-slate);
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: var(--radius-card);
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.prose strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.prose a {
+  color: var(--color-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  color: var(--color-slate);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-blue-mid);
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  color: var(--color-muted);
+  font-style: italic;
+}

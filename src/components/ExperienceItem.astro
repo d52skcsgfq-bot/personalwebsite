@@ -1,0 +1,91 @@
+---
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+interface Props {
+  // Provide either a literal `period` string, or `startDate`/`endDate`
+  // (format 'YYYY-MM') to have the range + duration computed at build time.
+  period?: string;
+  startDate?: string;
+  endDate?: string; // omit for an ongoing role ("Present")
+  roleEs: string;
+  roleEn: string;
+  company: string;
+  type?: string;
+  location?: string;
+  skills?: string[];
+  descriptionEs?: string;
+  descriptionEn?: string;
+}
+
+const {
+  period,
+  startDate,
+  endDate,
+  roleEs,
+  roleEn,
+  company,
+  type,
+  location,
+  skills,
+  descriptionEs,
+  descriptionEn,
+} = Astro.props;
+
+function parseYm(value: string) {
+  const [year, month] = value.split('-').map(Number);
+  return { year, month };
+}
+
+function formatYm(value: string) {
+  const { year, month } = parseYm(value);
+  return `${MONTHS[month - 1]} ${year}`;
+}
+
+// LinkedIn-style inclusive duration (counts both the start and end month).
+function durationLabel(start: { year: number; month: number }, end: { year: number; month: number }) {
+  const months = (end.year - start.year) * 12 + (end.month - start.month) + 1;
+  const years = Math.floor(months / 12);
+  const rem = months % 12;
+  const parts: string[] = [];
+  if (years > 0) parts.push(`${years} ${years === 1 ? 'yr' : 'yrs'}`);
+  if (rem > 0) parts.push(`${rem} ${rem === 1 ? 'mo' : 'mos'}`);
+  return parts.join(' ');
+}
+
+let periodLabel = period;
+if (startDate) {
+  const now = new Date();
+  const end = endDate ? parseYm(endDate) : { year: now.getFullYear(), month: now.getMonth() + 1 };
+  const endLabel = endDate ? formatYm(endDate) : 'Present';
+  periodLabel = `${formatYm(startDate)} – ${endLabel} · ${durationLabel(parseYm(startDate), end)}`;
+}
+---
+<div class="relative pl-8 pb-8 last:pb-0 group">
+  <!-- Timeline line -->
+  <div class="absolute left-[7px] top-3 bottom-0 w-px bg-border group-last:hidden"></div>
+  <!-- Timeline dot -->
+  <div class="absolute left-0 top-2 w-[15px] h-[15px] rounded-full border-[3px] border-blue bg-surface"></div>
+
+  <div>
+    <span class="text-xs font-medium text-blue bg-blue-soft px-2 py-0.5 rounded-full">{periodLabel}</span>
+    <h3 class="font-display font-bold text-base mt-2">
+      <span data-lang="es">{roleEs}</span>
+      <span data-lang="en">{roleEn}</span>
+    </h3>
+    <p class="text-sm text-muted font-medium">
+      {company}{type && ` · ${type}`}
+    </p>
+    {location && <p class="text-sm text-muted">{location}</p>}
+    {(descriptionEs || descriptionEn) && (
+      <p class="text-sm text-muted mt-1 leading-relaxed">
+        <span data-lang="es">{descriptionEs}</span>
+        <span data-lang="en">{descriptionEn}</span>
+      </p>
+    )}
+    {skills && skills.length > 0 && (
+      <p class="text-xs text-muted mt-2 leading-relaxed">
+        <span class="font-semibold text-text">Skills:</span> {skills.join(' · ')}
+      </p>
+    )}
+  </div>
+</div>

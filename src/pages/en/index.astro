@@ -1,0 +1,398 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import SkillBadge from '../../components/SkillBadge.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import ExperienceItem from '../../components/ExperienceItem.astro';
+
+const skills = [
+  'NetSuite', 'Shopify', 'Salesforce', 'HubSpot',
+  'Celigo Integrator.io', 'Shopify → NetSuite', 'SuiteScript 2.x',
+  'SuiteQL', 'REST APIs', 'GraphQL', 'Webhooks',
+  'JavaScript', 'Node.js', 'Claude Code', 'MCP Servers',
+  'Confluence',
+];
+---
+<BaseLayout
+  title="Jorge Iriarte — NetSuite & Integrations Technical Architect | Melbourne"
+  description="NetSuite and enterprise integration specialist. I connect platforms, automate complex processes and help organisations get the most from their technology stack."
+  lang="en"
+  alternateUrl="/"
+  isHomePage={true}
+>
+
+  <!-- HERO -->
+  <section class="hero pt-28 pb-20 px-4 sm:px-6
+                  md:pt-36 md:pb-28">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-3xl">
+        <p class="text-blue font-semibold text-sm mb-4 tracking-wide uppercase">
+          <span data-lang="es">Hola, soy</span>
+          <span data-lang="en">Hi, I'm</span>
+        </p>
+
+        <h1 class="font-display font-extrabold text-4xl leading-tight mb-6
+                    sm:text-5xl
+                    md:text-6xl">
+          Jorge Iriarte
+        </h1>
+
+        <h2 class="font-display font-bold text-xl text-muted mb-6
+                    sm:text-2xl">
+          <span data-lang="es">Arquitecto Técnico de NetSuite e Integraciones</span>
+          <span data-lang="en">NetSuite & Integrations Technical Architect</span>
+        </h2>
+
+        <p class="text-muted text-lg leading-relaxed mb-8 max-w-2xl">
+          <span data-lang="es">Conecto NetSuite con otras aplicaciones, automatizo procesos complejos y ayudo a organizaciones a sacar el máximo de su stack tecnológico.</span>
+          <span data-lang="en">I connect NetSuite with other applications, automate complex processes and help organisations get the most from their technology stack.</span>
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="#projects"
+             class="inline-flex items-center gap-2 bg-blue text-on-accent font-semibold text-sm px-6 py-3 rounded-card
+                    hover:bg-blue-mid transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <span data-lang="es">Ver Proyectos</span>
+            <span data-lang="en">View Projects</span>
+          </a>
+          <a href="#contact"
+             class="inline-flex items-center gap-2 bg-surface border border-border text-text font-semibold text-sm px-6 py-3 rounded-card
+                    hover:border-blue hover:text-blue transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span data-lang="es">Contacto</span>
+            <span data-lang="en">Contact</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-16 flex justify-center animate-bounce">
+        <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20 px-4 sm:px-6 bg-surface">
+    <div class="max-w-6xl mx-auto">
+      <SectionLabel
+        iconPath="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        labelEs="Sobre mí"
+        labelEn="About me"
+      />
+      <div class="grid md:grid-cols-5 gap-10 items-start">
+        <div class="md:col-span-3">
+          <h2 class="font-display font-extrabold text-3xl mb-6">
+            <span data-lang="es">Especialista en conectar sistemas y personas</span>
+            <span data-lang="en">Specialist in connecting systems and people</span>
+          </h2>
+          <div class="space-y-4 text-muted leading-relaxed">
+            <p data-lang="es">
+              Con más de 10 años de experiencia en el ecosistema NetSuite, me especializo en diseñar e implementar
+              integraciones enterprise que conectan plataformas como Shopify, Celigo y sistemas ERP. Actualmente
+              trabajo como Technical Specialist en Fusion5, Melbourne, donde lidero proyectos de integración
+              para clientes en Australia y Nueva Zelanda.
+            </p>
+            <p data-lang="en">
+              With over 10 years of experience in the NetSuite ecosystem, I specialise in designing and implementing
+              enterprise integrations that connect platforms like Shopify, Celigo and ERP systems. I currently
+              work as a Technical Specialist at Fusion5, Melbourne, where I lead integration projects
+              for clients across Australia and New Zealand.
+            </p>
+            <p data-lang="es">
+              Más allá de la tecnología, soy conductor del programa radial "Somos Latinos" en 3WBC 94.1 FM,
+              conectando a la comunidad latina en Melbourne. Padre de André y Didier, junto a mi compañera Noemí.
+            </p>
+            <p data-lang="en">
+              Beyond technology, I host the radio show "Somos Latinos" on 3WBC 94.1 FM,
+              connecting the Latin community in Melbourne. Father of André and Didier, together with my partner Noemí.
+            </p>
+          </div>
+        </div>
+        <div class="md:col-span-2 grid grid-cols-2 gap-4">
+          <div class="bg-blue-soft rounded-card p-5 text-center">
+            <p class="font-display font-extrabold text-2xl text-blue">10+</p>
+            <p class="text-xs text-muted mt-1">
+              <span data-lang="es">Años de experiencia</span>
+              <span data-lang="en">Years of experience</span>
+            </p>
+          </div>
+          <div class="bg-blue-soft rounded-card p-5 text-center">
+            <p class="font-display font-extrabold text-2xl text-blue">50+</p>
+            <p class="text-xs text-muted mt-1">
+              <span data-lang="es">Integraciones</span>
+              <span data-lang="en">Integrations</span>
+            </p>
+          </div>
+          <div class="bg-blue-soft rounded-card p-5 text-center">
+            <p class="font-display font-extrabold text-2xl text-blue">6+</p>
+            <p class="text-xs text-muted mt-1">
+              <span data-lang="es">Plataformas</span>
+              <span data-lang="en">Platforms</span>
+            </p>
+          </div>
+          <div class="bg-blue-soft rounded-card p-5 text-center">
+            <p class="font-display font-extrabold text-2xl text-blue">ANZ</p>
+            <p class="text-xs text-muted mt-1">
+              <span data-lang="es">Región</span>
+              <span data-lang="en">Region</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-20 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <SectionLabel
+        iconPath="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+        labelEs="Habilidades & Expertise"
+        labelEn="Skills & Expertise"
+      />
+      <h2 class="font-display font-extrabold text-3xl mb-4">
+        <span data-lang="es">Tecnologías y herramientas</span>
+        <span data-lang="en">Technologies and tools</span>
+      </h2>
+      <p class="text-muted mb-8 max-w-2xl">
+        <span data-lang="es">Herramientas y plataformas que utilizo para diseñar, construir y mantener integraciones enterprise robustas.</span>
+        <span data-lang="en">Tools and platforms I use to design, build, and maintain robust enterprise integrations.</span>
+      </p>
+      <div class="flex flex-wrap gap-2.5">
+        {skills.map((skill) => (
+          <SkillBadge name={skill} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-20 px-4 sm:px-6 bg-surface">
+    <div class="max-w-6xl mx-auto">
+      <SectionLabel
+        iconPath="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+        labelEs="Proyectos"
+        labelEn="Projects"
+      />
+      <h2 class="font-display font-extrabold text-3xl mb-4">
+        <span data-lang="es">Proyectos destacados</span>
+        <span data-lang="en">Featured projects</span>
+      </h2>
+      <p class="text-muted mb-8 max-w-2xl">
+        <span data-lang="es">Una selección de integraciones enterprise y proyectos técnicos que he liderado.</span>
+        <span data-lang="en">A selection of enterprise integrations and technical projects I've led.</span>
+      </p>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <ProjectCard
+          titleEs="Shopify → NetSuite: Integración de Pagos"
+          titleEn="Shopify → NetSuite: Payment Integration"
+          descriptionEs="Integración completa de pagos entre Shopify y NetSuite utilizando Celigo como middleware. Automatización de flujos de pedidos, pagos y reembolsos en tiempo real."
+          descriptionEn="End-to-end payment integration between Shopify and NetSuite using Celigo as middleware. Real-time automation of order, payment, and refund flows."
+          techStack={['Celigo', 'Shopify Webhooks', 'SuiteScript', 'NetSuite']}
+        />
+        <ProjectCard
+          titleEs="LogX → NetSuite: Integración de 6 flujos"
+          titleEn="LogX → NetSuite: 6-Flow Integration"
+          descriptionEs="Diseño e implementación de 6 flujos de integración bidireccional entre LogX y NetSuite, con documentación completa en Confluence."
+          descriptionEn="Design and implementation of 6 bidirectional integration flows between LogX and NetSuite, with comprehensive Confluence documentation."
+          techStack={['Celigo', 'REST APIs', 'Confluence', 'NetSuite']}
+        />
+        <ProjectCard
+          titleEs="Link Management: Integración de Comercio"
+          titleEn="Link Management: Commerce Integration"
+          descriptionEs="Sincronización de inventario, pedidos y fulfillment entre Shopify y NetSuite para una marca de e-commerce en rápido crecimiento."
+          descriptionEn="Inventory, orders, and fulfilment synchronisation between Shopify and NetSuite for a fast-growing e-commerce brand."
+          techStack={['Shopify', 'NetSuite', 'Inventory Sync', 'Celigo']}
+        />
+        <ProjectCard
+          titleEs="Roadmap de Adopción de IA en Fusion5"
+          titleEn="AI Adoption Roadmap at Fusion5"
+          descriptionEs="Liderazgo en la creación del roadmap de adopción de herramientas de IA para el equipo de desarrollo, incluyendo Claude Code, MCP Servers y CI/CD."
+          descriptionEn="Led the creation of an AI tool adoption roadmap for the development team, including Claude Code, MCP Servers, and CI/CD integration."
+          techStack={['Claude Code', 'MCP Servers', 'CI/CD', 'Developer Training']}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="py-20 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <SectionLabel
+        iconPath="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+        labelEs="Experiencia"
+        labelEn="Experience"
+      />
+      <h2 class="font-display font-extrabold text-3xl mb-8">
+        <span data-lang="es">Trayectoria profesional</span>
+        <span data-lang="en">Professional journey</span>
+      </h2>
+      <div class="max-w-2xl">
+        <ExperienceItem
+          startDate="2024-08"
+          roleEs="NetSuite CoE Lead - Applications"
+          roleEn="NetSuite CoE Lead - Applications"
+          company="Fusion5"
+          type="Full-time"
+          location="Melbourne, Victoria, Australia · Hybrid"
+        />
+        <ExperienceItem
+          startDate="2022-01"
+          endDate="2024-08"
+          roleEs="Technical Architect"
+          roleEn="Technical Architect"
+          company="Fusion5"
+          type="Full-time"
+          location="Melbourne, Victoria, Australia"
+          skills={['Microservices', 'Software as a Service (SaaS)', 'Problem Solving', 'Technically Oriented', 'Solution Architecture']}
+        />
+        <ExperienceItem
+          startDate="2019-12"
+          endDate="2021-12"
+          roleEs="NetSuite Development Team Lead"
+          roleEn="NetSuite Development Team Lead"
+          company="Fusion5"
+          location="Greater Melbourne Area"
+          skills={['Software as a Service (SaaS)', 'Problem Solving', 'Technically Oriented', 'Solution Architecture']}
+        />
+        <ExperienceItem
+          period="Ongoing"
+          roleEs="Co-Conductor Radial"
+          roleEn="Radio Co-Host"
+          company="Somos Latinos — 3WBC 94.1 FM"
+          descriptionEs="Co-conductor del programa radial 'Somos Latinos', conectando a la comunidad latinoamericana en Melbourne a través de música, entrevistas y cultura."
+          descriptionEn="Co-host of 'Somos Latinos' radio show, connecting the Latin American community in Melbourne through music, interviews, and culture."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- BEYOND WORK -->
+  <section id="beyond" class="py-20 px-4 sm:px-6 bg-surface">
+    <div class="max-w-6xl mx-auto">
+      <SectionLabel
+        iconPath="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+        labelEs="Más allá del trabajo"
+        labelEn="Beyond work"
+      />
+      <h2 class="font-display font-extrabold text-3xl mb-8">
+        <span data-lang="es">Comunidad y familia</span>
+        <span data-lang="en">Community and family</span>
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-bg rounded-card p-6 border border-border">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-blue-soft flex items-center justify-center">
+              <svg class="w-5 h-5 text-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m-4-6h8m-4-10V3m0 0a2 2 0 012 2v4a2 2 0 01-2 2 2 2 0 01-2-2V5a2 2 0 012-2z" />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-lg">Somos Latinos</h3>
+          </div>
+          <p class="text-muted text-sm leading-relaxed">
+            <span data-lang="es">
+              Conductor del programa "Somos Latinos" en 3WBC 94.1 FM, una estación de radio comunitaria en Melbourne.
+              A través de la radio, conecto a la comunidad latinoamericana con música, entrevistas, noticias y cultura.
+            </span>
+            <span data-lang="en">
+              Host of "Somos Latinos" on 3WBC 94.1 FM, a community radio station in Melbourne.
+              Through radio, I connect the Latin American community with music, interviews, news, and culture.
+            </span>
+          </p>
+          <p class="text-xs text-blue font-medium mt-3">3WBC 94.1 FM — Melbourne</p>
+        </div>
+        <div class="bg-bg rounded-card p-6 border border-border">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-blue-soft flex items-center justify-center">
+              <svg class="w-5 h-5 text-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-lg">
+              <span data-lang="es">Familia</span>
+              <span data-lang="en">Family</span>
+            </h3>
+          </div>
+          <p class="text-muted text-sm leading-relaxed">
+            <span data-lang="es">
+              Padre orgulloso de André y Didier, junto a mi compañera Noemí. Vivimos en Melbourne, Australia,
+              donde combinamos lo mejor de la cultura latina con el estilo de vida australiano.
+            </span>
+            <span data-lang="en">
+              Proud father of André and Didier, together with my partner Noemí. We live in Melbourne, Australia,
+              where we combine the best of Latin culture with the Australian lifestyle.
+            </span>
+          </p>
+          <p class="text-xs text-blue font-medium mt-3">Melbourne, Australia 🇦🇺</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <SectionLabel
+        iconPath="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+        labelEs="Contacto"
+        labelEn="Contact"
+      />
+      <div class="max-w-2xl">
+        <h2 class="font-display font-extrabold text-3xl mb-4">
+          <span data-lang="es">Hablemos</span>
+          <span data-lang="en">Let's talk</span>
+        </h2>
+        <p class="text-muted mb-8 leading-relaxed">
+          <span data-lang="es">
+            ¿Tienes un proyecto de integración? ¿Necesitas ayuda con NetSuite? ¿O simplemente quieres conectar?
+            No dudes en contactarme.
+          </span>
+          <span data-lang="en">
+            Have an integration project? Need help with NetSuite? Or just want to connect?
+            Don't hesitate to reach out.
+          </span>
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="mailto:jorge.iriarte@fusion5.com.au"
+             class="inline-flex items-center gap-3 bg-surface border border-border rounded-card px-6 py-4
+                    hover:border-blue hover:shadow-md transition-all group">
+            <div class="w-10 h-10 rounded-full bg-blue-soft flex items-center justify-center
+                        group-hover:bg-blue group-hover:text-white transition-colors">
+              <svg class="w-5 h-5 text-blue group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-muted">Email</p>
+              <p class="text-sm font-semibold">jorge.iriarte@fusion5.com.au</p>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/jorgeiriarte/"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="inline-flex items-center gap-3 bg-surface border border-border rounded-card px-6 py-4
+                    hover:border-blue hover:shadow-md transition-all group">
+            <div class="w-10 h-10 rounded-full bg-blue-soft flex items-center justify-center
+                        group-hover:bg-blue group-hover:text-white transition-colors">
+              <svg class="w-5 h-5 text-blue group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-muted">LinkedIn</p>
+              <p class="text-sm font-semibold">jorgeiriarte</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
